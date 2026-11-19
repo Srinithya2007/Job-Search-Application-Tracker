@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">J</span>
+            <span>JobTrack</span>
+        </div>
+
+        <nav>
+            <a href="#dashboard" class="nav-item active">▦ Dashboard</a>
+            <a href="#applications" class="nav-item">▤ Applications</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="profile">
+                <div class="avatar">JD</div>
+                <div>
+                    <strong>Job Seeker</strong>
+                    <small>Career Dashboard</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content" id="dashboard">
+
+        <header class="topbar">
+            <div>
+                <h1>Job Application Dashboard</h1>
+                <p>Keep track of your career opportunities.</p>
+            </div>
+
+            <button class="primary-btn" id="addJobBtn">
+                + Add Application
+            </button>
+        </header>
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon purple">▤</div>
+                <p>Total Applications</p>
+                <h2 id="totalCount">0</h2>
+                <span class="stat-note">All tracked applications</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon blue">◷</div>
+                <p>Interviews</p>
+                <h2 id="interviewCount">0</h2>
+                <span class="stat-note">Interview stage</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <p>Offers</p>
+                <h2 id="offerCount">0</h2>
+                <span class="stat-note">Offers received</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon red">✕</div>
+                <p>Rejected</p>
+                <h2 id="rejectedCount">0</h2>
+                <span class="stat-note">Closed applications</span>
+            </div>
+
+        </section>
+
+        <!-- Applications -->
+        <section class="applications-section" id="applications">
+
+            <div class="section-heading">
+                <div>
+                    <h2>My Applications</h2>
+                    <p>Manage and monitor your job applications.</p>
+                </div>
+            </div>
+
+            <div class="toolbar">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search company or job role..."
+                >
+
+                <select id="filterStatus">
+                    <option value="All">All Status</option>
+                    <option value="Applied">Applied</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Offer">Offer</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+
+                <select id="sortDate">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Job Role</th>
+                            <th>Location</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="jobTableBody">
+                    </tbody>
+                </table>
+
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">📂</div>
+                    <h3>No applications found</h3>
+                    <p>Add your first job application to get started.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal-overlay" id="jobModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Add Application</h2>
+                <p>Enter your job application details.</p>
+            </div>
+
+            <button class="close-btn" id="closeModal">&times;</button>
+        </div>
+
+        <form id="jobForm">
+
+            <input type="hidden" id="jobId">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Company Name *</label>
+                    <input type="text" id="company" placeholder="e.g. Google" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Job Role *</label>
+                    <input type="text" id="role" placeholder="e.g. Software Developer" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="e.g. Chennai / Remote">
+                </div>
+
+                <div class="form-group">
+                    <label>Date Applied *</label>
+                    <input type="date" id="dateApplied" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="status">
+                        <option value="Applied">Applied</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Offer">Offer</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Job Link</label>
+                    <input type="url" id="jobLink" placeholder="https://example.com/job">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Notes</label>
+                    <textarea id="notes" placeholder="Add interview details, reminders, or notes..."></textarea>
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
+                <button type="submit" class="primary-btn">Save Application</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
